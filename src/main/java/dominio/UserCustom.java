@@ -1,6 +1,6 @@
 package dominio;
 
-public class User {
+public class UserCustom {
     private Long idUser;
     private String fisrtName;
     private String fullName;
