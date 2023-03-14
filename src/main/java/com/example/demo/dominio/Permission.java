@@ -1,4 +1,4 @@
-package dominio;
+package com.example.demo.dominio;
 
 public class Permission {
 

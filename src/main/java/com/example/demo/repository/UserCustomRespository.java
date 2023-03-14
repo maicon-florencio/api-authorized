@@ -1,6 +1,6 @@
-package repository;
+package com.example.demo.repository;
 
-import dominio.UserCustom;
+import com.example.demo.dominio.UserCustom;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
