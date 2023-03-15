@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class UserCustomDTO implements Serializable {
 
     private Long idUser;
-    private String fisrtName;
+    private String firstName;
     private String fullName;
     private String password;
     private Boolean enabled;
