@@ -24,7 +24,7 @@ public class UserCustom {
     private String password;
 
     @Column(nullable = false)
-    private Boolean enabled;
+    private Boolean enabled= Boolean.TRUE;
     @CreatedDate
     private Date createdAT;
 

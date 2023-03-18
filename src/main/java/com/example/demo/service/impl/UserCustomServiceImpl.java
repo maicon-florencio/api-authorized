@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.exception.BusinessException;
 import com.example.demo.mapper.UserCustomMapper;
 import com.example.demo.repository.UserCustomRespository;
 import com.example.demo.service.Dto.UserCustomDTO;
@@ -17,9 +18,21 @@ public class UserCustomServiceImpl implements UserCustomService {
 
     @Override
     public UserCustomDTO save(UserCustomDTO entityBody) {
-        if( entityBody == null) throw new RuntimeException("Erro Objeto nullo");
-        if(userCustomRespository.findByEmail(entityBody.getEmail())) throw new RuntimeException("Email ja cadastrado");
+        validatedObject(entityBody);
         var userCustomSaved = userCustomRespository.save(UserCustomMapper.INSTANCE.toEntity(entityBody));
         return UserCustomMapper.INSTANCE.toDto(userCustomSaved) ;
+    }
+
+    private static void validatedNullObjeto(UserCustomDTO entityBody) {
+        if( entityBody == null) throw new BusinessException("Erro: Objeto nulo");
+    }
+
+    private void validatedEmailDuplicated(UserCustomDTO entityBody) {
+        if(userCustomRespository.findByEmail(entityBody.getEmail())) throw new BusinessException("Erro : email ja cadastrado");
+    }
+
+    private void validatedObject(UserCustomDTO entityBody){
+        validatedNullObjeto(entityBody);
+        validatedEmailDuplicated(entityBody);
     }
 }
