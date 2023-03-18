@@ -18,8 +18,6 @@ public class UserCustomController {
     private UserCustomService userCustomService;
     Logger log = LoggerFactory.getLogger(UserCustomController.class);
 
-
-
     @PostMapping
     public ResponseEntity<UserCustomDTO> createUser(@RequestBody UserCustomDTO eBody){
         log.info("Chamada de criacao user");
