@@ -19,6 +19,7 @@ public class UserCustom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUser;
     private String firstName;
+    private String email;
     private String fullName;
     private String password;
 

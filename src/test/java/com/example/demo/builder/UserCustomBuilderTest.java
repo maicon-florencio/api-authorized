@@ -1,7 +1,7 @@
 package com.example.demo.builder;
 
 import com.example.demo.dominio.UserCustom;
-import com.example.demo.service.DTO.UserCustomDTO;
+import com.example.demo.service.Dto.UserCustomDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;

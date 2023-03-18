@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserCustomRespository extends JpaRepository<UserCustom,Long> {
 
+   boolean findByEmail(String email);
 }

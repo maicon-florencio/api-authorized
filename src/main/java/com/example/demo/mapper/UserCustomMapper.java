@@ -1,8 +1,7 @@
 package com.example.demo.mapper;
 
 import com.example.demo.dominio.UserCustom;
-import com.example.demo.service.DTO.UserCustomDTO;
-import org.mapstruct.BeanMapping;
+import com.example.demo.service.Dto.UserCustomDTO;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

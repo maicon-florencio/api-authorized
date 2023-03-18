@@ -1,4 +1,4 @@
-package com.example.demo.service.DTO;
+package com.example.demo.service.Dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,6 +16,7 @@ public class UserCustomDTO implements Serializable {
 
     private Long idUser;
     private String firstName;
+    private String email;
     private String fullName;
     private String password;
     private Boolean enabled;

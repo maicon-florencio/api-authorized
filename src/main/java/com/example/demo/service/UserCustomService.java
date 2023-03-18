@@ -1,8 +1,9 @@
 package com.example.demo.service;
 
-import com.example.demo.service.DTO.UserCustomDTO;
+import com.example.demo.service.Dto.UserCustomDTO;
+import org.springframework.http.ResponseEntity;
 
 public interface UserCustomService {
 
-    UserCustomDTO findByID(Long userId);
+    UserCustomDTO save(UserCustomDTO dto);
 }
