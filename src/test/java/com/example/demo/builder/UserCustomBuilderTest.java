@@ -5,6 +5,7 @@ import com.example.demo.service.DTO.UserCustomDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -17,6 +18,7 @@ public class UserCustomBuilderTest {
                 .fullName("S Quieroz")
                 .password("banana")
                 .enabled(Boolean.TRUE)
+                .createdAT(new Date())
                 .build();
     }
 
@@ -27,6 +29,7 @@ public class UserCustomBuilderTest {
                 .fullName("Sanchez")
                 .password("Cocacola")
                 .enabled(Boolean.TRUE)
+                .createdAT(new Date())
                 .build();
     }
 

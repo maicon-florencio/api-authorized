@@ -1,7 +1,9 @@
 package com.example.demo.dominio;
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.repository.Temporal;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -22,6 +24,8 @@ public class UserCustom {
 
     @Column(nullable = false)
     private Boolean enabled;
+    @CreatedDate
+    private Date createdAT;
 
 
 

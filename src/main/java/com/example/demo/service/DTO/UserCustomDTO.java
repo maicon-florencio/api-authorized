@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Date;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -17,5 +19,6 @@ public class UserCustomDTO implements Serializable {
     private String fullName;
     private String password;
     private Boolean enabled;
+    private Date createdAT;
 
 }

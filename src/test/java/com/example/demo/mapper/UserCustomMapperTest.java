@@ -2,7 +2,6 @@ package com.example.demo.mapper;
 
 import com.example.demo.builder.UserCustomBuilderTest;
 import com.example.demo.dominio.UserCustom;
-import com.example.demo.service.DTO.UserCustomDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
