@@ -33,7 +33,7 @@ public class UserCustomControllerTest {
 
     private static final String API_URL = "/v1/api/auth";
     @Test
-    public void createdNewUserCustom() throws Exception{
+    void createdNewUserCustom() throws Exception{
 
         var userDto = userBuilder.returnUserDTOOKAtivo();
 
@@ -50,13 +50,13 @@ public class UserCustomControllerTest {
                 .andExpect(jsonPath("idUser").isNotEmpty())
                 .andExpect(jsonPath("email").value("teste@gmail.com"));
 
-        Assertions.assertTrue(userDto.getEmail().equals("teste@gmail.com"));
-        Assertions.assertTrue(userDto.getIdUser().equals(3L));
+        Assertions.assertEquals("teste@gmail.com", userDto.getEmail());
+        Assertions.assertEquals(3L, (long) userDto.getIdUser());
 
     }
 
     @Test
-    public void errorCreatedNewUserCustomWithOutEmail() throws Exception{
+     void errorCreatedNewUserCustomWithOutEmail() throws Exception{
 
         var userDto = userBuilder.returnUserDTOOKAtivo();
         userDto.setEmail("");
@@ -74,7 +74,7 @@ public class UserCustomControllerTest {
 
     }
     @Test
-    public void findUserCustomById() throws Exception {
+     void findUserCustomById() throws Exception {
 
         var userDto = userBuilder.returnUserDTOOKAtivo();
 
@@ -90,8 +90,8 @@ public class UserCustomControllerTest {
                 .andExpect(jsonPath("idUser").isNotEmpty())
                 .andExpect(jsonPath("email").value("teste@gmail.com"));
 
-        Assertions.assertTrue(userDto.getEmail().equals("teste@gmail.com"));
-        Assertions.assertTrue(userDto.getIdUser().equals(3L));
+        Assertions.assertEquals("teste@gmail.com", userDto.getEmail());
+        Assertions.assertEquals(3L, (long) userDto.getIdUser());
 
     }
 
