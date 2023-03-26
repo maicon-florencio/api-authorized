@@ -1,6 +1,7 @@
 package com.example.demo.controllerTest;
 
 import com.example.demo.builder.UserCustomBuilderTest;
+import com.example.demo.exception.BusinessException;
 import com.example.demo.service.UserCustomService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
@@ -53,5 +54,46 @@ public class UserCustomControllerTest {
         Assertions.assertTrue(userDto.getIdUser().equals(3L));
 
     }
+
+    @Test
+    public void errorCreatedNewUserCustomWithOutEmail() throws Exception{
+
+        var userDto = userBuilder.returnUserDTOOKAtivo();
+        userDto.setEmail("");
+
+        Mockito.when(userCustomService.save(userDto)).thenThrow(new BusinessException("Erro : email null")) ;
+
+        var request = MockMvcRequestBuilders.post(API_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new ObjectMapper().writeValueAsBytes(userDto))
+                .accept(MediaType.APPLICATION_JSON);
+
+        mockMvc.perform(request)
+                .andDo(print())
+                .andExpect(status().isBadRequest());
+
+    }
+    @Test
+    public void findUserCustomById() throws Exception {
+
+        var userDto = userBuilder.returnUserDTOOKAtivo();
+
+        Mockito.when(userCustomService.findById(3L)).thenReturn(userDto) ;
+
+        var request = MockMvcRequestBuilders.get(API_URL.concat("/3"))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON);
+
+        mockMvc.perform(request)
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("idUser").isNotEmpty())
+                .andExpect(jsonPath("email").value("teste@gmail.com"));
+
+        Assertions.assertTrue(userDto.getEmail().equals("teste@gmail.com"));
+        Assertions.assertTrue(userDto.getIdUser().equals(3L));
+
+    }
+
 
 }

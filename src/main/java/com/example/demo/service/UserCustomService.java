@@ -6,4 +6,6 @@ import org.springframework.http.ResponseEntity;
 public interface UserCustomService {
 
     UserCustomDTO save(UserCustomDTO dto);
+
+    UserCustomDTO findById(Long id);
 }
