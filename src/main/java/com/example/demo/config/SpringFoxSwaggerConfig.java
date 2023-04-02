@@ -19,7 +19,7 @@ public class SpringFoxSwaggerConfig {
         return  new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.ant("v1/api/**"))
+                .paths(PathSelectors.ant("/v1/**"))
                 .build();
     }
 }
