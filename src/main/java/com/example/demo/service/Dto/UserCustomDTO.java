@@ -22,4 +22,8 @@ public class UserCustomDTO implements Serializable {
     private Boolean enabled;
     private Date createdAT;
 
+    private boolean account_non_expored = Boolean.TRUE;
+    private boolean account_non_locked = Boolean.TRUE;
+    private boolean account_non_expired = Boolean.TRUE;
+
 }
