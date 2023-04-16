@@ -3,15 +3,17 @@ package com.example.demo.dominio;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Permissao {
+public class Permissao implements GrantedAuthority,Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,4 +26,8 @@ public class Permissao {
             {@JoinColumn(name="id_permissao")})
     private List<UserCustom> users;
 
+    @Override
+    public String getAuthority() {
+        return this.description;
+    }
 }
