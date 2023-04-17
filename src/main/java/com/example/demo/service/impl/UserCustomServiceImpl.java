@@ -25,6 +25,7 @@ public class UserCustomServiceImpl implements UserCustomService {
     public UserCustomDTO save(UserCustomDTO entityBody) {
         log.info("------- Inicio criacao novo user auth ------");
         validatedObject(entityBody);
+        if(findUserByEmail(entityBody.getEmail()) != null) throw new BusinessException("Erro : email ja cadastrado");
         var userCustomSaved = userCustomRespository.save(UserCustomMapper.INSTANCE.toEntity(entityBody));
         log.info("------- Fim  criacao novo user auth ------");
         return UserCustomMapper.INSTANCE.toDto(userCustomSaved) ;
@@ -33,7 +34,7 @@ public class UserCustomServiceImpl implements UserCustomService {
     @Override
     public UserCustomDTO findById(Long id) {
        if(!userCustomRespository.existsById(id)) {
-           throw new BusinessException("Erro: " + id + " não encontrado");
+           throw new BusinessException(String.format("Erro: %d não encontrado", id));
        }else{
            return UserCustomMapper.INSTANCE.toDto(userCustomRespository.getReferenceById(id));
        }
@@ -44,19 +45,21 @@ public class UserCustomServiceImpl implements UserCustomService {
         if( entityBody == null) throw new BusinessException("Erro: Objeto nulo");
     }
     private static void validatedObjectWithOutEmail(UserCustomDTO entityBody) {
-        if( entityBody == null) throw new BusinessException("Erro: Erro : email null");
-    }
-
-    private void validatedEmailDuplicated(UserCustomDTO entityBody) {
-        if(userCustomRespository.findByEmail(entityBody.getEmail())) throw new BusinessException("Erro : email ja cadastrado");
+        if( entityBody == null) throw new BusinessException("Erro: email null");
     }
 
     private void validatedObject(UserCustomDTO entityBody){
         log.info("------- Inicio validacao de novo auth ------");
         validatedNullObjeto(entityBody);
         validatedObjectWithOutEmail(entityBody);
-        validatedEmailDuplicated(entityBody);
         log.info("------- Fim validacao de novo auth ------");
+    }
+    @Override
+    public UserCustomDTO findUserByEmail(String emailSearch){
+        var userFound = userCustomRespository.findUserCustomByEmail(emailSearch);
+        if(userFound ==null)
+            throw new BusinessException(" User not found by email : " + emailSearch);
+        return UserCustomMapper.INSTANCE.toDto(userFound);
     }
 
 

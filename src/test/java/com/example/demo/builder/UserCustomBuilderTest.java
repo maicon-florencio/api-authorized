@@ -1,5 +1,6 @@
 package com.example.demo.builder;
 
+import com.example.demo.dominio.Permissao;
 import com.example.demo.dominio.UserCustom;
 import com.example.demo.service.Dto.UserCustomDTO;
 import org.springframework.stereotype.Component;
@@ -19,6 +20,8 @@ public class UserCustomBuilderTest {
                 .email("teste@gmail.com")
                 .password("banana")
                 .enabled(Boolean.TRUE)
+                .accountNonExpired(Boolean.TRUE)
+                .accountNonLocked(Boolean.TRUE)
                 .createdAT(new Date())
                 .build();
     }
@@ -31,6 +34,9 @@ public class UserCustomBuilderTest {
                 .email("teste@gmail.com")
                 .password("Cocacola")
                 .enabled(Boolean.TRUE)
+                .accountNonExpired(Boolean.TRUE)
+                .accountNonLocked(Boolean.TRUE)
+                .createdAT(new Date())
                 .createdAT(new Date())
                 .build();
     }

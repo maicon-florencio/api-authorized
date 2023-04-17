@@ -95,5 +95,27 @@ public class UserCustomControllerTest {
 
     }
 
+    @Test
+    void findUserCustomByEmail() throws Exception {
+
+        var userDto = userBuilder.returnUserDTOOKAtivo();
+
+        Mockito.when(userCustomService.findUserByEmail("teste@gmail.com")).thenReturn(userDto) ;
+
+        var request = MockMvcRequestBuilders.get(API_URL.concat("/find-user-by-email/"+ userDto.getEmail()))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON);
+
+        mockMvc.perform(request)
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("idUser").isNotEmpty())
+                .andExpect(jsonPath("email").value("teste@gmail.com"));
+
+        Assertions.assertEquals("teste@gmail.com", userDto.getEmail());
+        Assertions.assertEquals(3L, (long) userDto.getIdUser());
+
+    }
+
 
 }

@@ -8,4 +8,6 @@ public interface UserCustomService {
     UserCustomDTO save(UserCustomDTO dto);
 
     UserCustomDTO findById(Long id);
+
+    UserCustomDTO findUserByEmail(String email);
 }

@@ -1,5 +1,6 @@
 package com.example.demo.service.Dto;
 
+import com.example.demo.dominio.Permissao;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Builder
@@ -22,8 +24,10 @@ public class UserCustomDTO implements Serializable {
     private Boolean enabled;
     private Date createdAT;
 
-    private boolean account_non_expored;
-    private boolean account_non_locked;
-    private boolean account_non_expired ;
+    private boolean credentialsNonExpired;
+    private boolean accountNonLocked;
+    private boolean accountNonExpired ;
+
+    private List<Permissao> permissoes;
 
 }

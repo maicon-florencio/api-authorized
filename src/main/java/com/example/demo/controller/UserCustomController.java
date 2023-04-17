@@ -27,4 +27,10 @@ public class UserCustomController {
         return ResponseEntity.ok(userCustomService.findById(id));
     }
 
+    @GetMapping("/find-user-by-email/{email}")
+    public ResponseEntity<UserCustomDTO> findById(@PathVariable("email") String email){
+        log.info("Chamada de buscar user por Email");
+        return ResponseEntity.ok(userCustomService.findUserByEmail(email));
+    }
+
 }
