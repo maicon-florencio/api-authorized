@@ -4,8 +4,6 @@ spring:
   mvc:
       pathmatch:
         matching-strategy: path_pattern_parser
-  security:
-
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/db_validated_auth?useTimezone=true&serverTimezone=UTC
@@ -20,3 +18,8 @@ spring:
     show-sql: false
 server:
   port: 8084
+security:
+  jwt:
+    token:
+      secret-key: 53cr37
+      expire-length: 360000

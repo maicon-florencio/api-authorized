@@ -1,6 +1,8 @@
 package com.example.demo.service.Dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,7 +18,7 @@ public class TokenDTO implements Serializable {
     private String acessToken;
     private String refreshToken;
 
-    public TokenDTO(String username, String email, Boolean auhenticated, Date created, Date expiration, String acessToken, String refreshToken) {
+    public TokenDTO(String email, Boolean auhenticated, Date created, Date expiration, String acessToken, String refreshToken) {
         this.username = username;
         this.email = email;
         this.auhenticated = auhenticated;
@@ -24,5 +26,8 @@ public class TokenDTO implements Serializable {
         this.expiration = expiration;
         this.acessToken = acessToken;
         this.refreshToken = refreshToken;
+    }
+    public TokenDTO(){
+
     }
 }

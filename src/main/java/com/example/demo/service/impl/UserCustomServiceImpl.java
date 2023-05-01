@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.dominio.UserCustom;
 import com.example.demo.exception.BusinessException;
 import com.example.demo.mapper.UserCustomMapper;
 import com.example.demo.repository.UserCustomRespository;
@@ -62,6 +63,10 @@ public class UserCustomServiceImpl implements UserCustomService {
         return UserCustomMapper.INSTANCE.toDto(userFound);
     }
 
-
-
+    @Override
+    public UserCustom loadUserByEmail(String email) {
+        var userFound = userCustomRespository.findUserCustomByEmail(email);
+        if (userFound == null) throw new BusinessException(" User not found by email : " + email);
+        return userFound;
+    }
 }
