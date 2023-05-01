@@ -1,5 +1,6 @@
 package com.example.demo.security.service;
 
+import com.example.demo.Util.ErrorMsgUtil;
 import com.example.demo.repository.UserCustomRespository;
 import com.example.demo.security.JwtTokenProvider;
 import com.example.demo.service.Dto.AccountCredentialsDTO;
@@ -25,7 +26,7 @@ public class AuthService {
     private UserCustomRespository respository;
     @SuppressWarnings("rawtypes")
     public ResponseEntity signin(AccountCredentialsDTO data){
-        if(!Objects.nonNull(data)) return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid Cliente Request");
+        if(!Objects.nonNull(data)) return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ErrorMsgUtil.ERRO_INVALID_CLIENT_RESQUEST);
         try{
             var email =  data.getEmail();
             var password = data.getPassword();
@@ -37,10 +38,10 @@ public class AuthService {
              }else {
                  throw new UsernameNotFoundException("Email " + email + " not found");
              }
-             if(!Objects.nonNull(tokenResponse)) return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid Cliente Request");
+             if(!Objects.nonNull(tokenResponse)) return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ErrorMsgUtil.ERRO_INVALID_CLIENT_RESQUEST);
         return ResponseEntity.ok(tokenResponse);
         }catch (Exception e){
-            throw new BadCredentialsException("Invalid username/password supplied");
+            throw new BadCredentialsException(ErrorMsgUtil.ERRO_INVALID_CLIENT_PASSWORD);
         }
     }
 }
