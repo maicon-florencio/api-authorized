@@ -31,7 +31,7 @@ public class UserCustomControllerTest {
     @Autowired
     protected UserCustomBuilderTest userBuilder;
 
-    private static final String API_URL = "/v1/api/auth";
+    private static final String API_URL = "/v1/api/user";
     @Test
     void createdNewUserCustom() throws Exception{
 
