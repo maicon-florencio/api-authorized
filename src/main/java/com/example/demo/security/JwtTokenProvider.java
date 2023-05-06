@@ -35,7 +35,7 @@ public class JwtTokenProvider {
     @Autowired
     private UserCustomService userCustomService;
 
-    Algorithm algorithm =  null;
+    private  Algorithm algorithm =null;
     @PostConstruct
     protected void init(){
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
@@ -48,6 +48,16 @@ public class JwtTokenProvider {
         var acessToken = getAcessToken(email, roles,now,validity);
         var refreshToken = getRefreshToken(email, roles,now);
        return new TokenDTO(email,Boolean.TRUE,now,validity,acessToken,refreshToken);
+    }
+    public TokenDTO refreshToken(String tokenAtual){
+        if (tokenAtual.contains(BEARER)) tokenAtual =
+                tokenAtual.substring(BEARER.length());
+
+        JWTVerifier verifier = JWT.require(algorithm).build();
+        DecodedJWT decodedJWT = verifier.verify(tokenAtual);
+        String userEmail = decodedJWT.getSubject();
+        List<String> roles = decodedJWT.getClaim("roles").asList(String.class);
+        return createAcessToken(userEmail, roles);
     }
 
     private String getAcessToken(String email, List<String> roles, Date now, Date validity) {
@@ -87,7 +97,7 @@ public class JwtTokenProvider {
 
     public String resolveToken(HttpServletRequest req){
         String bearerToken = req.getHeader("Authorization");
-        if(!bearerToken.isEmpty() && bearerToken.startsWith(BEARER))
+        if(bearerToken != null && bearerToken.startsWith(BEARER))
             return bearerToken.substring(BEARER.length());
         return null;
     }

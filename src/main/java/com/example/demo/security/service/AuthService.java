@@ -44,4 +44,28 @@ public class AuthService {
             throw new BadCredentialsException(ErrorMsgUtil.ERRO_INVALID_CLIENT_PASSWORD);
         }
     }
+
+    @SuppressWarnings("rawtypes")
+    public ResponseEntity refreshToken(String email, String refreshToken) {
+        var user = respository.findUserCustomByEmail(email);
+        if(checkIfParamsIsNotNull(email,refreshToken)) return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request!");
+        var tokenResponse = new TokenDTO();
+        if (user != null) {
+            tokenResponse = tokenProvider.refreshToken(refreshToken);
+            if(tokenResponse == null) return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request!");
+        } else {
+            throw new UsernameNotFoundException(String.format("Username s% not found!", email));
+        }
+        return ResponseEntity.ok(tokenResponse);
+    }
+
+    private boolean checkIfParamsIsNotNull(String username, String refreshToken) {
+        return refreshToken == null || refreshToken.isBlank() ||
+                username == null || username.isBlank();
+    }
+
+    private boolean checkIfParamsIsNotNull(AccountCredentialsDTO data) {
+        return data == null || data.getEmail() == null || data.getEmail().isBlank()
+                || data.getPassword() == null || data.getPassword().isBlank();
+    }
 }

@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
@@ -21,10 +20,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtTokenProvider tokenProvider;
 
-    public SecurityConfig(JwtTokenProvider tokenProvider) {
-        this.tokenProvider = tokenProvider;
-    }
-
     @Bean
     public PasswordEncoder passwordEncoder(){
         Map<String,PasswordEncoder> encoderMap = new HashMap<>();
@@ -33,28 +28,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         passwordEncoder.setDefaultPasswordEncoderForMatches(new Pbkdf2PasswordEncoder());
         return passwordEncoder;
     }
-
-
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
-        http
-                .httpBasic().disable()
-                .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeRequests()
-                .antMatchers("/v1/api/auth/signin", "/auth/refresh", "/api-docs/**", "/swagger-ui.html**").permitAll()
-                .antMatchers("/v1/api/**").authenticated()
-                .antMatchers("/users").denyAll()
-                .and()
-                .cors()
-                .and()
-                .apply(new JwtConfigurer(tokenProvider));
-
-    }
     @Bean
     @Override
     protected AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();
     }
+
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+            http
+                .httpBasic().disable()
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .and()
+                         .authorizeRequests()
+                                .antMatchers("/v1/auth/signin",
+                                                         "/v1/auth/refresh",
+                                                             "**/api-docs/**",
+                                                                "/swagger-ui.html**").permitAll()
+                                .antMatchers("/v1/api/**").authenticated()
+                                .antMatchers("/users").denyAll()
+                    .and()
+                        .cors()
+                    .and()
+                    .apply(new JwtConfigurer(tokenProvider));
+
+    }
+
 }
