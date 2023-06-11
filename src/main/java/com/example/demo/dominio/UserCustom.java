@@ -1,17 +1,14 @@
 package com.example.demo.dominio;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +18,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "users")
-public class UserCustom implements UserDetails,Serializable {
+public class UserCustom implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,7 +53,7 @@ public class UserCustom implements UserDetails,Serializable {
     }
 
 
-    @Override
+   /* @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.permissoes;
     }
@@ -86,5 +83,5 @@ public class UserCustom implements UserDetails,Serializable {
 @Override
     public String getPassword() {
         return this.password;
-    }
+    }*/
 }

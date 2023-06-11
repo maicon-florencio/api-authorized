@@ -1,11 +1,10 @@
 package com.example.demo.dominio;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,7 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Permissao implements GrantedAuthority,Serializable {
+public class Permissao implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,13 +20,13 @@ public class Permissao implements GrantedAuthority,Serializable {
     private Long idPermissao;
     private String description;
     @ManyToMany
-    @JoinTable(name="pessoa_has_permission", joinColumns=
-            {@JoinColumn(name="id_user")}, inverseJoinColumns=
-            {@JoinColumn(name="id_permissao")})
+    @JoinTable(name = "pessoa_has_permission", joinColumns =
+            {@JoinColumn(name = "id_user")}, inverseJoinColumns =
+            {@JoinColumn(name = "id_permissao")})
     private List<UserCustom> users;
 
-    @Override
+   /* @Override
     public String getAuthority() {
         return this.description;
-    }
+    }*/
 }

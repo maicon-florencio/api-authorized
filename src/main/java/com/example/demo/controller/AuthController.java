@@ -1,15 +1,12 @@
 package com.example.demo.controller;
 
-import com.example.demo.security.service.AuthService;
-import com.example.demo.service.Dto.AccountCredentialsDTO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/v1/auth")
 public class AuthController {
-    @Autowired
+   /* @Autowired
     private AuthService authService;
     @SuppressWarnings("rawtypes")
     @PostMapping("/signin")
@@ -23,5 +20,5 @@ public class AuthController {
     public ResponseEntity refreshToken(@PathVariable("email") String email,
                                        @RequestHeader("Authorization") String refreshToken) {
         return this.authService.refreshToken(email,refreshToken);
-    }
+    }*/
 }
