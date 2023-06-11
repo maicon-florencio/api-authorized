@@ -29,11 +29,12 @@ public class UserCustomController {
 
     }
     @GetMapping("/{id}")
-    @Operation(summary = "Finds person from ID", description = "Finds person from ID", responses = {
+    @Operation(summary = "Finds person by ID", description = "Finds person from ID", responses = {
             @ApiResponse(description = "Sucess", responseCode = "200", content = @Content(
                     mediaType = "application/json",array = @ArraySchema(schema = @Schema(implementation = UserCustomDTO.class))
             )),
             @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+            @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
             @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
             @ApiResponse(description = "Bad Request", responseCode = "401", content = @Content),
             @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
@@ -44,6 +45,16 @@ public class UserCustomController {
     }
 
     @GetMapping("/find-user-by-email/{email}")
+    @Operation(summary = "Finds person by email ", description = "Finds person from ID", responses = {
+            @ApiResponse(description = "Sucess", responseCode = "200", content = @Content(
+                    mediaType = "application/json",array = @ArraySchema(schema = @Schema(implementation = UserCustomDTO.class))
+            )),
+            @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+            @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
+            @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+            @ApiResponse(description = "Bad Request", responseCode = "401", content = @Content),
+            @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
+    })
     public ResponseEntity<UserCustomDTO> findById(@PathVariable("email") String email){
         log.info("Chamada de buscar user por Email");
         return ResponseEntity.ok(userCustomService.findUserByEmail(email));
