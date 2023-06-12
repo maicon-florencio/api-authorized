@@ -23,6 +23,15 @@ public class UserCustomController {
     Logger log = LoggerFactory.getLogger(UserCustomController.class);
 
     @PostMapping
+    @Operation(summary = "Finds person by ID", description = "Finds person from ID", responses = {
+            @ApiResponse(description = "Sucess", responseCode = "200", content = @Content(
+                    mediaType = "application/json",array = @ArraySchema(schema = @Schema(implementation = UserCustomDTO.class))
+            )),
+            @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+            @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+            @ApiResponse(description = "Autorized", responseCode = "401", content = @Content),
+            @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
+    })
     public ResponseEntity<UserCustomDTO> createUser(@RequestBody UserCustomDTO eBody){
         log.info("Chamada de criacao user");
         return ResponseEntity.ok(userCustomService.save(eBody));
@@ -36,7 +45,7 @@ public class UserCustomController {
             @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
             @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
             @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
-            @ApiResponse(description = "Bad Request", responseCode = "401", content = @Content),
+            @ApiResponse(description = "Autorized", responseCode = "401", content = @Content),
             @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
     })
     public ResponseEntity<UserCustomDTO> findById(@PathVariable("id") Long id){
@@ -52,7 +61,7 @@ public class UserCustomController {
             @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
             @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
             @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
-            @ApiResponse(description = "Bad Request", responseCode = "401", content = @Content),
+            @ApiResponse(description = "Autorized", responseCode = "401", content = @Content),
             @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
     })
     public ResponseEntity<UserCustomDTO> findById(@PathVariable("email") String email){
