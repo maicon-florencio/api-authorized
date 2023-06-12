@@ -1,17 +1,26 @@
-server:
-  port: 8888
 spring:
+  application:
+    name: auth-service
+  mvc:
+    pathmatch:
+      matching-strategy: path_pattern_parser
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
     show-sql: false
+server:
+  port: 8084
 security:
   jwt:
     token:
       secret-key: 53cr37
       expire-length: 360000
+spring-doc:
+  paths-to-match: /v1/**/api/**
+  swagger-ui:
+    use-root-path: true

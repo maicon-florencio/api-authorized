@@ -8,6 +8,4 @@ import org.springframework.stereotype.Repository;
 public interface UserCustomRespository extends JpaRepository<UserCustom,Long> {
 
    UserCustom findUserCustomByEmail( String email);
-
-
 }

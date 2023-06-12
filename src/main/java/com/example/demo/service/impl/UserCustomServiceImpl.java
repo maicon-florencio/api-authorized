@@ -6,11 +6,13 @@ import com.example.demo.mapper.UserCustomMapper;
 import com.example.demo.repository.UserCustomRespository;
 import com.example.demo.service.Dto.UserCustomDTO;
 import com.example.demo.service.UserCustomService;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class UserCustomServiceImpl implements UserCustomService {
     private final UserCustomRespository userCustomRespository;
     Logger log = LoggerFactory.getLogger(UserCustomServiceImpl.class);
