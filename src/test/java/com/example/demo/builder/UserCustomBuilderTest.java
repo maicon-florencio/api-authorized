@@ -36,7 +36,6 @@ public class UserCustomBuilderTest {
                 .accountNonExpired(Boolean.TRUE)
                 .accountNonLocked(Boolean.TRUE)
                 .createdAT(new Date())
-                .createdAT(new Date())
                 .build();
     }
 

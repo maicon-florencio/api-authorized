@@ -46,42 +46,7 @@ public class UserCustom implements Serializable {
             inverseJoinColumns =  {@JoinColumn (name = "id_permissao")})
     private List<Permissao> permissoes;
 
-    public List<String> getRoles(){
-        List<String> roles =  new ArrayList<>();
-        permissoes.forEach(p -> roles.add(p.getDescription()));
-        return roles;
-    }
 
 
-   /* @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.permissoes;
-    }
 
-    @Override
-    public String getUsername() {
-        return this.firstName;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return this.credentialsNonExpired;
-    }
-    @Override
-    public boolean isAccountNonLocked() {
-        return this.accountNonLocked;
-    }
-    @Override
-    public boolean isAccountNonExpired() {
-        return accountNonExpired;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return this.enabled;
-    }
-@Override
-    public String getPassword() {
-        return this.password;
-    }*/
 }

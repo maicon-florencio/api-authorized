@@ -8,18 +8,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.lifecycle.Startables;
 
-import java.beans.ConstructorProperties;
 import java.util.Map;
 import java.util.stream.Stream;
 
 @ContextConfiguration(initializers =  AbstractIntegrationTest.Initialazer.class)
 public class AbstractIntegrationTest {
 
-    public AbstractIntegrationTest(){
-
-    }
-    public class Initialazer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
-        static MySQLContainer<?> mysql = new MySQLContainer<>("mysql:8.0.29");
+    static class Initialazer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+        static MySQLContainer<?> mysql = new MySQLContainer<>("mysql:8.0.33");
         
         private static void startContainers(){
             Startables.deepStart(Stream.of(mysql)).join();
